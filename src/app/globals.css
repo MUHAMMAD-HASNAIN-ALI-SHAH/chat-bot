@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  --foreground: #ffffff;
+  --background: #171717;
+}
+
