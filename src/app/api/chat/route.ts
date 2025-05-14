@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
-      contents: `${message} this is a message just gave him a suitable chatName of 2 or 3 word only dont give anyother response`,
+      contents: `Given the message: "${message}", generate a suitable chat name consisting of only 2 or 3 words. Respond with a single chat name only. Do not include any explanation, formatting, or additional suggestions.`,
     });
 
     const createChat = await Chat.create({

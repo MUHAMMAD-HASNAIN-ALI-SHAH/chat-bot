@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import db from "@/utils/db";
 import Message from "@/models/message.model";
-import { GoogleGenAI } from "@google/genai";
 import Chat from "@/models/chat.model";
+import { GoogleGenAI } from "@google/genai";
+
 const ai = new GoogleGenAI({ apiKey: process.env.GEMNI_API_KEY! });
 
 export async function POST(req: Request) {
   await db();
-
   let { message, userId, chatId } = await req.json();
 
   try {
@@ -18,19 +18,30 @@ export async function POST(req: Request) {
 
     chatId = checkChat._id;
     checkChat.totalChats += 1;
-
     await checkChat.save();
 
-    const response = await ai.models.generateContent({
+    const previousMessages = await Message.find({ chatId }).sort({ createdAt: 1 });
+
+    const conversation = [
+      ...previousMessages.map((msg: any) => [
+        { role: "user", parts: [{ text: msg.message }] },
+        { role: "model", parts: [{ text: msg.reply }] },
+      ]).flat(),
+      { role: "user", parts: [{ text: message }] },
+    ];
+
+    const result = await ai.models.generateContent({
       model: "gemini-2.0-flash",
-      contents: message,
+      contents: conversation,
     });
+
+    const reply = await result.text;
 
     const newMessage = await Message.create({
       message,
       userId,
       chatId,
-      reply: response.text,
+      reply,
     });
 
     return NextResponse.json(
@@ -41,7 +52,7 @@ export async function POST(req: Request) {
       { status: 201 }
     );
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
       {
         message: "Error creating record",
