@@ -26,7 +26,7 @@ const Chats = () => {
         messages.map((message) => (
           <div
             key={message._id}
-            className="flex flex-col gap-5 w-full px-3 py-2"
+            className="flex flex-col gap-6 w-full px-3 py-2"
           >
             <div className="w-full text-right ">
               <span className="bg-gray-400 py-2 px-4 rounded-sm">
