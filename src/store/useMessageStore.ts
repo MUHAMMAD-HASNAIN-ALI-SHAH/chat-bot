@@ -14,6 +14,7 @@ interface Message {
 
 interface MessageStore {
   messages: Message[];
+  sendMessageLoader: boolean;
   sendMessage: (form: {
     message: String;
     userId: String;
@@ -24,18 +25,22 @@ interface MessageStore {
 
 const useMessageStore = create<MessageStore>((set, get) => ({
   messages: [],
+  sendMessageLoader: false,
 
   sendMessage: async (form) => {
     try {
+      set({ sendMessageLoader: true });
       form.chatId = useChatStore.getState().selectedChat?._id || "";
       const response = await axios.post(
         "http://localhost:3000/api/message",
         form
       );
+      set({ sendMessageLoader: false });
       set({ messages: [...get().messages, response.data.data] });
     } catch (error) {
       console.log(error);
       toast.error("Error sending response");
+      set({ sendMessageLoader: false });
     }
   },
   getMessages: async (userId) => {

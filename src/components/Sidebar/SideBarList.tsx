@@ -18,6 +18,7 @@ const SideBarList = () => {
 
   return (
     <>
+      <p className="px-2 font-bold mt-5">Your Chats</p>
       {chats.length > 0 ? (
         chats.map((chat) => (
           <button
