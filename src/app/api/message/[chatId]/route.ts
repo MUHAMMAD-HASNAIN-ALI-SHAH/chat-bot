@@ -9,7 +9,7 @@ type Params = {
   };
 };
 
-export async function GET(req: NextRequest, context: Params) {
+export async function GET(req: any, context: any) {
   await db();
 
   try {
