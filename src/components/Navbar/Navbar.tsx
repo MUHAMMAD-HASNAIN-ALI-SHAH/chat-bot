@@ -1,10 +1,11 @@
+"use client"
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 import { SidebarTrigger } from "../ui/sidebar";
 
 const Navbar = () => {
   return (
-    <div className="w-full flex justify-between py-5 px-3 border-b-2 border-gray-300">
+    <div className="h-[10vh] w-full flex justify-between py-5 px-3 border-b-2 border-gray-300">
       <div>
         <SidebarTrigger />
       </div>

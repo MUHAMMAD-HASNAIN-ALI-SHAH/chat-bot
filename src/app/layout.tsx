@@ -33,7 +33,7 @@ export default function RootLayout({
         <AppSidebar />
         <html lang="en">
           <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}
+            className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen overflow-hidden`}
           >
             <Toaster />
             {children}

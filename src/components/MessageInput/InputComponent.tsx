@@ -38,26 +38,21 @@ const InputComponent = () => {
   };
 
   return (
-    <div className="w-2/3 px-5 bg-neutral-700 py-3 rounded-3xl">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+    <div className="w-2/3 px-5 shadow-2xl py-3 border-2 border-gray-500 rounded-3xl h-full">
+      <form onSubmit={handleSubmit} className="relative flex flex-col gap-2">
         <input
           type="text"
-          className="w-full outline-none focus:ring-0 text-white px-3 py-2 rounded"
+          className="w-full outline-none focus:ring-0 px-3 py-2 rounded pr-14"
           placeholder="Type your message here ..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
-
-        <div className="flex justify-end">
-          <button
-            type="submit"
-            className="rounded-full bg-white hover:bg-white/70"
-          >
-            <div className="px-2 py-1 cursor-pointer">
-              <i className="ri-arrow-up-line text-black text-xl"></i>
-            </div>
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="absolute rounded-full bg-black hover:bg-black/75 px-3 py-2 right-0 cursor-pointer"
+        >
+          <i className="ri-arrow-up-line text-white"></i>
+        </button>
       </form>
     </div>
   );
