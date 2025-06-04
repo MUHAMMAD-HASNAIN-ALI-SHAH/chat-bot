@@ -5,12 +5,12 @@ import { useEffect } from "react";
 
 const SideBarList = () => {
   const { loadChats, chats, selectedChat, selectChat } = useChatStore();
-  const { user,isLoaded } = useUser();
+  const { user, isLoaded } = useUser();
 
   useEffect(() => {
     const fetchChats = async () => {
       loadChats(user!.id);
-    }
+    };
     if (isLoaded && user) {
       fetchChats();
     }
@@ -23,8 +23,8 @@ const SideBarList = () => {
           <button
             onClick={() => selectChat(chat)}
             key={chat._id}
-            className={`btn btn-ghost text-start ${
-              selectedChat?._id === chat._id ? "bg-gray-100 text-black" : ""
+            className={`btn btn-ghost text-start cursor-pointer w-full py-2 rounded-md px-2 hover:bg-gray-300 ${
+              selectedChat?._id === chat._id ? "bg-gray-300 text-black" : ""
             }`}
           >
             {chat.chatName ? chat.chatName : "New Chat"}

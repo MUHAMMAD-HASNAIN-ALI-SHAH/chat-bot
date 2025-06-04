@@ -3,9 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import "remixicon/fonts/remixicon.css";
-import {
-  ClerkProvider,
-} from '@clerk/nextjs'
+import { ClerkProvider } from "@clerk/nextjs";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/Sidebar/AppSidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,14 +29,17 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}
-        >
-          <Toaster />
-          {children}
-        </body>
-      </html>
+      <SidebarProvider>
+        <AppSidebar />
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}
+          >
+            <Toaster />
+            {children}
+          </body>
+        </html>
+      </SidebarProvider>
     </ClerkProvider>
   );
 }

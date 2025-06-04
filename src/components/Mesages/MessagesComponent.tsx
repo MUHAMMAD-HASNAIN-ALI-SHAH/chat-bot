@@ -2,16 +2,16 @@
 import useChatStore from "@/store/useChatStore";
 import useMessageStore from "@/store/useMessageStore";
 import { useEffect, useRef } from "react";
-import NoChatSelectedComponent from "./SubComponents/NoChatSelectedComponent";
-import Navbar from "./Navbar";
-import InputComponent from "./InputComponent";
-import { UserButton, useUser } from "@clerk/nextjs";
+import NoChatSelectedComponent from "../SubComponents/NoChatSelectedComponent";
+import Navbar from "../Navbar/Navbar";
+import { useUser } from "@clerk/nextjs";
 import ReactMarkdown from "react-markdown";
+import InputComponent from "../MessageInput/InputComponent";
 
 const MessagesComponent = () => {
   const { selectedChat, tempChat } = useChatStore();
   const { getMessages, messages } = useMessageStore();
-  const { user, isLoaded } = useUser();
+  const { user } = useUser();
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
