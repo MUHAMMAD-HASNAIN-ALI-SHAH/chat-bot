@@ -15,6 +15,7 @@ interface Message {
 interface MessageStore {
   messages: Message[];
   sendMessageLoader: boolean;
+  getMessagesLoader: boolean;
   sendMessage: (form: {
     message: String;
     userId: String;
@@ -26,6 +27,7 @@ interface MessageStore {
 const useMessageStore = create<MessageStore>((set, get) => ({
   messages: [],
   sendMessageLoader: false,
+  getMessagesLoader: false,
 
   sendMessage: async (form) => {
     try {
@@ -46,6 +48,8 @@ const useMessageStore = create<MessageStore>((set, get) => ({
   getMessages: async (userId) => {
     try {
       if (useChatStore.getState().selectedChat === null) return;
+      set({ messages: [] });
+      set({ getMessagesLoader: true });
       const response = await axios.get(
         `http://localhost:3000/api/message/${
           useChatStore.getState().selectedChat!._id
@@ -56,10 +60,12 @@ const useMessageStore = create<MessageStore>((set, get) => ({
           },
         }
       );
+      set({ getMessagesLoader: false });
       set({ messages: response.data });
     } catch (error) {
       console.log(error);
       toast.error("Error getting response");
+      set({ getMessagesLoader: false });
     }
   },
 }));

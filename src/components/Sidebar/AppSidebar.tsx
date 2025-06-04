@@ -10,7 +10,7 @@ import NewChatButton from "./NewChatButton";
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar className="bg-white">
       <SidebarHeader>
         <div className="mt-10">
           <NewChatButton />

@@ -13,6 +13,7 @@ interface ChatStore {
   selectedChat: Chat | null;
   tempChat: boolean;
   chats: Chat[];
+  chatsLoader: boolean; 
   loadChats: (userId: string) => void;
   addChat: (user: any) => void;
   selectChat: (chat: Chat) => void;
@@ -23,18 +24,22 @@ const useChatStore = create<ChatStore>((set, get) => ({
   selectedChat: null,
   tempChat: true,
   chats: [],
+  chatsLoader: false,
   loadChats: async (userId) => {
     try {
+      set({ chatsLoader: true });
       // if (useChatStore.getState().selectedChat) return null;
       const response = await axios.get("http://localhost:3000/api/chat", {
         headers: {
           userId: userId,
         },
       });
+      set({ chatsLoader: false });
       set({ chats: response.data.chats });
     } catch (error) {
       console.log(error);
       toast.error("Error loading chats");
+      set({ chatsLoader: false });
     }
   },
   addChat: async (user) => {
