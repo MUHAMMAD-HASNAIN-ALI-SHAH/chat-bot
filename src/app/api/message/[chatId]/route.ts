@@ -1,11 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import db from "@/utils/db";
 import Message from "@/models/message.model";
 import Chat from "@/models/chat.model";
 
 export async function GET(
-  req: Request,
-  { params }: { params: { chatId: string } }
+  req: NextRequest,
+  context: { params: { chatId: string } }
 ) {
   await db();
   try {
@@ -15,7 +15,7 @@ export async function GET(
       return NextResponse.json({ msg: "No userId provided" }, { status: 401 });
     }
 
-    const chatId = params.chatId;
+    const chatId = context.params.chatId;
 
     const getChat = await Chat.findById(chatId);
     if (!getChat) {
@@ -33,13 +33,9 @@ export async function GET(
       createdAt: 1,
     });
 
-    if (!messages) {
-      messages = [];
-    }
-
-    return NextResponse.json(messages, { status: 200 });
+    return NextResponse.json(messages ?? [], { status: 200 });
   } catch (error: any) {
-    console.log(error);
+    console.error(error);
     return NextResponse.json(
       {
         message: "Error getting record",
