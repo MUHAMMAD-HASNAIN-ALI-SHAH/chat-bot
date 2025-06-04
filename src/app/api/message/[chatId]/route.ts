@@ -3,11 +3,15 @@ import db from "@/utils/db";
 import Message from "@/models/message.model";
 import Chat from "@/models/chat.model";
 
-export async function GET(
-  req: NextRequest,
-  context: { params: { chatId: string } }
-) {
+type Params = {
+  params: {
+    chatId: string;
+  };
+};
+
+export async function GET(req: NextRequest, context: Params) {
   await db();
+
   try {
     const userId = req.headers.get("userId");
 
@@ -29,7 +33,7 @@ export async function GET(
       );
     }
 
-    let messages = await Message.find({ chatId: getChat._id }).sort({
+    const messages = await Message.find({ chatId: getChat._id }).sort({
       createdAt: 1,
     });
 
@@ -38,7 +42,7 @@ export async function GET(
     console.error(error);
     return NextResponse.json(
       {
-        message: "Error getting record",
+        message: "Error getting messages",
         error: error.message,
       },
       { status: 500 }
