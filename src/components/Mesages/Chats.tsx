@@ -9,13 +9,11 @@ const Chats = () => {
   const { getMessages, messages, sendMessageLoader } = useMessageStore();
   const { user } = useUser();
   const bottomRef = useRef<HTMLDivElement | null>(null);
-
   useEffect(() => {
     if (selectedChat && user) {
       getMessages(user.id);
     }
   }, [selectedChat]);
-
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
