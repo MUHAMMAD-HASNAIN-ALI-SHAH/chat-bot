@@ -20,9 +20,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Hasnain AI Chat Bot",
   description: "This is an Hasnain AI Chat Bot application. It allows users to chat with an AI bot.",
-  icons: {
-    icon: "",
-  },
 };
 
 export default function RootLayout({
