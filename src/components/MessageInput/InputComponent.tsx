@@ -38,7 +38,7 @@ const InputComponent = () => {
   };
 
   return (
-    <div className="w-2/3 px-5 shadow-2xl py-3 border-2 border-gray-500 rounded-3xl h-full">
+    <div className="w-full md:w-2/3 px-5 shadow-2xl py-3 border-2 border-gray-500 rounded-3xl h-full">
       <form onSubmit={handleSubmit} className="relative flex flex-col gap-2">
         <input
           type="text"
