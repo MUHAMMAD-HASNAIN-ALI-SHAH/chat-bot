@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import db from "@/utils/db";
+import db from "@/lib/db";
 import Chat from "@/models/chat.model";
 import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({ apiKey: process.env.GEMNI_API_KEY! });

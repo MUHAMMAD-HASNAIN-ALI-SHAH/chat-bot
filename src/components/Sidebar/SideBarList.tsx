@@ -1,18 +1,17 @@
 "use client";
 import useChatStore from "@/store/useChatStore";
-import { useUser } from "@clerk/nextjs";
 import { useEffect } from "react";
 
-const SideBarList = () => {
+const SideBarList = ({ session }: { session: any }) => {
   const { loadChats, chats, selectedChat, selectChat, chatsLoader } =
     useChatStore();
-  const { user, isLoaded } = useUser();
+  const user = session?.user;
 
   useEffect(() => {
     const fetchChats = async () => {
       loadChats(user!.id);
     };
-    if (isLoaded && user) {
+    if (user) {
       fetchChats();
     }
   }, [user, loadChats]);

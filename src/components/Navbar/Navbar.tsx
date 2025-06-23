@@ -1,22 +1,28 @@
-"use client"
+"use client";
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
 import { SidebarTrigger } from "../ui/sidebar";
+import { Button } from "@/components/ui/button";
+import DropDown from "./DropDown";
 
-const Navbar = () => {
+const Navbar = ({ session }: { session: any }) => {
+  const user = session?.user;
   return (
-    <div className="h-[10vh] w-full flex justify-between py-5 px-3 border-b-2 border-gray-300">
-      <div>
-        <SidebarTrigger />
-      </div>
-      <div className="flex-1">
-        <Link href={"/"} className="px-3 text-xl font-bold">
-          Hasnain Chat
+    <div className="h-[10vh] select-none bg-white w-full flex justify-between items-center py-5 px-3 border-b-2 border-gray-300">
+      <div className="flex items-center gap-4">
+        <SidebarTrigger className="cursor-pointer hover:bg-white" />
+        <Link href={"/"} className="font-semibold">
+          AskAI
         </Link>
       </div>
-      <div className="flex gap-4">
+      <div className="">
         <div>
-          <UserButton />
+          {user ? (
+            <DropDown user={user} />
+          ) : (
+            <Button className="btn btn-ghost text-lg font-semibold">
+              Sign In
+            </Button>
+          )}
         </div>
       </div>
     </div>

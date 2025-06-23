@@ -1,11 +1,10 @@
 "use client";
 import useChatStore from "@/store/useChatStore";
-import { useUser } from "@clerk/nextjs";
 import React from "react";
 
-const NewChatButton = () => {
+const NewChatButton = ({ session }: { session: any }) => {
   const { addChat } = useChatStore();
-  const { user } = useUser();
+  const user = session?.user;
   return (
     <div
       onClick={() => addChat(user)}

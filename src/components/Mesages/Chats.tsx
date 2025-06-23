@@ -1,14 +1,12 @@
 import useChatStore from "@/store/useChatStore";
 import useMessageStore from "@/store/useMessageStore";
 import { useEffect, useRef } from "react";
-import { useUser } from "@clerk/nextjs";
 import ReactMarkdown from "react-markdown";
 
 const Chats = () => {
   const { selectedChat } = useChatStore();
   const { getMessages, messages, sendMessageLoader, getMessagesLoader } =
     useMessageStore();
-  const { user } = useUser();
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
