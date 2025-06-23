@@ -6,6 +6,7 @@ import { auth } from "@/lib/auth";
 import { signup } from "@/lib/actions";
 import GoogleSignIn from "@/components/auth/GoogleSignIn";
 import { GithubSignIn } from "@/components/auth/GithubSignIn";
+import Signup from "@/components/auth/Signup";
 
 const Page = async () => {
   const session = await auth();
@@ -34,34 +35,7 @@ const Page = async () => {
           </div>
 
           {/* Email/Password Sign Up */}
-          <form
-            className="space-y-4"
-            action={async (formData) => {
-              "use server";
-              const email = formData.get("email") as string;
-              const password = formData.get("password") as string;
-              await signup({ email, password });
-              redirect("/sign-in");
-            }}
-          >
-            <Input
-              name="email"
-              placeholder="Email"
-              type="email"
-              required
-              autoComplete="email"
-            />
-            <Input
-              name="password"
-              placeholder="Password"
-              type="password"
-              required
-              autoComplete="new-password"
-            />
-            <Button className="w-full" type="submit">
-              Sign Up
-            </Button>
-          </form>
+          <Signup />
 
           <div className="text-center">
             <Button asChild variant="link">

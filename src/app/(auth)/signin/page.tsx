@@ -34,7 +34,7 @@ const Page = async () => {
 
           <div className="text-center">
             <Button asChild variant="link">
-              <Link href="/signin">Don&apos;t have an account? Sign up</Link>
+              <Link href="/signup">Don&apos;t have an account? Sign up</Link>
             </Button>
           </div>
         </div>
