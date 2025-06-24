@@ -1,3 +1,4 @@
+"use client";
 import {
   Sidebar,
   SidebarContent,
@@ -7,25 +8,54 @@ import {
 } from "@/components/ui/sidebar";
 import SideBarList from "./SideBarList";
 import NewChatButton from "./NewChatButton";
-import { auth } from "@/lib/auth";
+import Mode from "./Mode";
+import useThemeStore from "@/store/useThemeStore";
 
-export async function AppSidebar() {
-  const session = await auth();
+export function AppSidebar({ session }: { session: any }) {
+  const { theme } = useThemeStore();
   return (
-    <Sidebar className="bg-white">
-      <SidebarHeader>
+    <Sidebar
+      className={`${
+        theme === "dark" ? "bg-[#181818] border-r border-[#181818] text-[#ECECEC]" : "bg-white text-black"
+      }`}
+    >
+      <SidebarHeader
+        className={`${
+          theme === "dark"
+            ? "bg-[#181818] text-[#ECECEC]"
+            : "bg-white text-black"
+        }`}
+      >
         <div className="mt-10">
           <NewChatButton session={session} />
         </div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent
+        className={`${
+          theme === "dark"
+            ? "bg-[#181818] text-[#ECECEC]"
+            : "bg-white text-black"
+        }`}
+      >
         <SidebarGroup>
           <div className="w-full">
             <SideBarList session={session} />
           </div>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter
+        className={`${
+          theme === "dark"
+            ? "bg-[#181818] text-[#ECECEC]"
+            : "bg-white text-black"
+        }`}
+      >
+        <Mode />
+
+        <div className="flex justify-center items-center w-full h-10 text-gray-500 text-sm">
+          <p>Made with ❤️ by AskAI</p>
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }

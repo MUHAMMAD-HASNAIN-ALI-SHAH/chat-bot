@@ -12,7 +12,7 @@ const Page = async () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200">
-      <div className="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md">
+      <div className="bg-white p-8 rounded-lg shadow-2xl w-full max-w-md mx-5 md:max-0">
         <div className="w-full max-w-sm mx-auto space-y-6">
           <h1 className="text-2xl font-bold text-center mb-6">Sign In</h1>
 

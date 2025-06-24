@@ -1,14 +1,12 @@
 "use client";
 import useChatStore from "@/store/useChatStore";
 import useMessageStore from "@/store/useMessageStore";
-import { useUser } from "@clerk/nextjs";
 import { useState } from "react";
 
 const InputComponent = () => {
   const [message, setMessage] = useState("");
   const { sendMessage, sendMessageLoader } = useMessageStore();
   const { selectedChat, createChat, tempChat } = useChatStore();
-  const { user } = useUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

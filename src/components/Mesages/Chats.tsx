@@ -1,13 +1,15 @@
+"use client";
 import useChatStore from "@/store/useChatStore";
 import useMessageStore from "@/store/useMessageStore";
 import { useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 
-const Chats = () => {
+const Chats = ({ session }: { session: any }) => {
   const { selectedChat } = useChatStore();
   const { getMessages, messages, sendMessageLoader, getMessagesLoader } =
     useMessageStore();
   const bottomRef = useRef<HTMLDivElement | null>(null);
+  const user = session?.user;
 
   useEffect(() => {
     if (selectedChat && user?.id) {

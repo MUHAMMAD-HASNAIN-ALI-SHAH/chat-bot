@@ -12,11 +12,11 @@ export default async function Home() {
   }
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar session={session} />
       <div className="w-full h-screen bg-gray-200 overflow-hidden">
         <Navbar session={session} />
         <div className="flex w-full h-[90vh] overflow-hidden">
-          {/* <MessagesComponent /> */}
+          <MessagesComponent session={session} />
         </div>
       </div>
     </SidebarProvider>

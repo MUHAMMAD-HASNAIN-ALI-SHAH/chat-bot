@@ -1,9 +1,11 @@
 "use client";
+
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function CredentialsSignIn() {
   const [email, setEmail] = useState("");
@@ -20,10 +22,9 @@ export default function CredentialsSignIn() {
     });
 
     if (result?.error) {
-      console.error("Sign in error:", result.error);
-      alert("Invalid credentials");
+      toast.error("Invalid credentials");
     } else {
-      router.push("/");
+      router.push("/"); // or any callbackUrl
     }
   };
 

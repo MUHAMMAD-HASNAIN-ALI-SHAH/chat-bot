@@ -1,15 +1,13 @@
 "use client";
-
 import { signOut } from "next-auth/react";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Profile } from "../profile/Profile";
 
 const DropDown = ({ user }: { user: any }) => {
   const handleLogout = async () => {
@@ -34,9 +32,7 @@ const DropDown = ({ user }: { user: any }) => {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end">
-        <DropdownMenuItem className="cursor-pointer hover:bg-gray-200 transition duration-200">
-          <i className="ri-user-line"></i> My Account
-        </DropdownMenuItem>
+        <Profile />
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={handleLogout}
